@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/banner.css">
+</head>
+
+<body>
+    <div class="banner" id="banner">
+        <div class="bnr_box">
+            <ul class="bnr_list">
+                <li><a href="#"><img src="./images/1.jpg" alt=""></a></li>
+                <li><a href="#"><img src="./images/2.jpg" alt=""></a></li>
+                <li><a href="#"><img src="./images/3.jpg" alt=""></a></li>
+                <li><a href="#"><img src="./images/4.jpg" alt=""></a></li>
+                <li><a href="#"><img src="./images/5.jpg" alt=""></a></li>
+            </ul>
+            <ol>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol>
+            <a href="javascript:;" class="bnr_s next">next</a>
+            <a href="javascript:;" class="bnr_s prev">prev</a>
+        </div>
+    </div>
+    <script>
+        class Banner {
+            constructor(id) {
+                this.bnr = document.getElementById(id);
+                this.bnrLis = this.bnr.querySelectorAll('.bnr_list li');
+                this.bnrNav = this.bnr.querySelectorAll('ol li');
+                this.next = this.bnr.querySelector('.next');
+                this.prev = this.bnr.querySelector('.prev');
+                this.index = 0;
+                this.timer = null;
+                this.init();
+            }
+
+            init() {
+                this.change(this.index);
+                this.toNext();
+                this.toPrev();
+                this.addClass(this.index);
+                this.bnrNavC();
+                this.autoPlay();
+                this.mouseoverBnr();
+            }
+
+            toNext() {
+                this.next.onclick = () => {
+                    this.nextC();
+                }
+            }
+
+            toPrev() {
+                this.prev.onclick = () => {
+                    this.prevC();
+                }
+            }
+
+            change(_index) {
+                this.bnrLis.forEach(item => {
+                    item.style.display = 'none';
+                });
+                this.bnrLis[_index].style.display = 'block';
+            }
+
+            bnrNavC() {
+                this.bnrNav.forEach((item, index) => {
+                    item.onclick = () => {
+                        this.addClass(index);
+                        this.change(index);
+                    }
+                });
+            }
+
+            autoPlay() {
+                this.timer = setInterval(() => {
+                    this.nextC();
+                }, 4000);
+            }
+
+            addClass(_index) {
+                this.bnrNav.forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.bnrNav[_index].classList.add('active');
+            }
+
+            mouseoverBnr() {
+                this.bnr.onmouseover = () => {
+                    clearInterval(this.timer);
+                }
+                this.bnr.onmouseout = () => {
+                    clearInterval(this.timer);
+                    this.autoPlay();
+                }
+            }
+
+            nextC() {
+                this.index++;
+                if (this.index >= this.bnrLis.length) {
+                    this.index = 0;
+                }
+                this.change(this.index);
+                this.addClass(this.index);
+            }
+
+            prevC() {
+                this.index--;
+                if (this.index <= 0) {
+                    this.index = this.bnrLis.length - 1;
+                }
+                this.change(this.index);
+                this.addClass(this.index);
+            }
+
+           
+        }
+
+        let bnr = new Banner('banner');
+
+    </script>
+</body>
+
+</html>

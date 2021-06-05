@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.box,
+.box1 {
+    float: left;
+    width: 800px;
+    border: 2px solid blue;
+}
+
+.tab_btn {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    display: -webkit-flex;
+    border-bottom: 2px solid blue;
+}
+
+.tab_btn span {
+    width: calc(100%/4);
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    border-right: 2px solid blue;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.tab_btn span:last-child {
+    border-right: none;
+}
+
+.tab_btn span.active {
+    background: blue;
+    color: #fff;
+}
+
+.tab_car {
+    width: 100%;
+    height: 500px;
+    position: relative;
+}
+
+.tab_car div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 500px;
+    line-height: 500px;
+    text-align: center;
+    font-size: 100px;
+    display: none;
+    /* background: skyblue; */
+}
+
+.tab_car div.show {
+    display: block;
+}

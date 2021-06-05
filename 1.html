@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            // 箭头函数中不能使用 yield 来定义状态
+            function* gen() {
+                yield '提交结果';
+                yield '审核中';
+                yield '审核完成';
+                return '结束';
+            }
+
+            let g = gen();
+            console.log(g.next());
+            console.log(g.next());
+            console.log(g.next());
+            console.log(g.next());
+
+
+        }
+    </script>
+</body>
+
+</html>

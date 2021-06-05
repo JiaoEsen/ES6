@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            // 定义 Symbol
+            let a = Symbol('a');
+            let b = Symbol('a');
+
+            //相同参数的Symbol的返回值不相等
+            console.log(a === b);
+
+            // 返回 Symbol 的描述
+            console.log(a.description); //a
+
+            // Symbol 不能与其他类型的值进行运算
+            // console.log(a + '1');
+            // console.log(a + 1);
+
+            // Symbol 可以转换成布尔值和字符串 但是不能转为数值
+            console.log(Boolean(a));
+            console.log(String(b));
+
+
+        } {
+            const sym = Symbol('abc');
+            let obj = {
+                a: 1,
+                [sym]: '123'
+            }
+
+            // 获取普通属性名
+            console.log(Object.getOwnPropertyNames(obj));
+            // 获取Symbol 属性名
+            console.log(Object.getOwnPropertySymbols(obj));
+            // 获取所有属性
+            console.log(Reflect.ownKeys(obj));
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 800px;
+            border: 2px solid blue;
+        }
+
+        .tab_btn {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            display: -webkit-flex;
+            border-bottom: 2px solid blue;
+        }
+
+        .tab_btn span {
+            width: calc(100%/4);
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-right: 2px solid blue;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-size: 30px;
+        }
+
+        .tab_btn span:last-child {
+            border-right: none;
+        }
+
+        .tab_btn span.active {
+            background: blue;
+            color: #fff;
+        }
+
+        .tab_car {
+            width: 100%;
+            height: 500px;
+            position: relative;
+        }
+
+        .tab_car div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 500px;
+            line-height: 500px;
+            text-align: center;
+            font-size: 100px;
+            display: none;
+            /* background: skyblue; */
+        }
+
+        .tab_car div.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="tab_btn">
+            <span class="active">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </div>
+        <div class="tab_car">
+            <div class="active">1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </div>
+    </div>
+    <script>
+        let tabBtns = document.querySelectorAll('.tab_btn span');
+        let tabCars = document.querySelectorAll('.tab_car div');
+
+        for (let i = 0; i < tabBtns.length; i++) {
+            tabBtns[i].onclick = function () {
+                for (let i = 0; i < tabBtns.length; i++) {
+                    tabBtns[i].classList.remove('active');
+                    tabCars[i].classList.remove('active');
+                }
+                tabBtns[i].classList.add('active');
+                tabCars[i].classList.add('active');
+            }
+        };
+    </script>
+</body>
+
+</html>

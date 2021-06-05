@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            let obj = {
+                name: 'zhangsan',
+                age: 20,
+                _skill: '唱歌',
+                _like: '打球',
+                weight: '108kg',
+                height: '185.6cm'
+            }
+
+            let monitor = new Proxy(obj, {
+                get(target, key) {
+                    if (key === 'age') {
+                        return Number.parseInt(target[key].toString().replace(20, 18));
+                    } else {
+                        return target[key];
+                    }
+                },
+                set(target, key, value) {
+                    switch (key) {
+                        case 'weight':
+                            target['weight'] = value;
+                            break;
+                        case 'height':
+                            target['height'] = value;
+                            break;
+                        default:
+                            return target[key];
+                            break;
+                    }
+                },
+                has(target, key) {
+                    if (key.startsWith('_')) {
+                        return false;
+                    } else {
+                        return key in target;
+                    }
+                },
+                deleteProperty(target, key) {
+                    if (key === 'name') {
+                        delete target[key];
+                    } else {
+                        return false;
+                    }
+                },
+                ownKeys(target) {
+                    return Object.keys(target).filter(item => !item.startsWith('_'));
+                }
+            });
+
+
+            console.log('访问年龄永远18', monitor.age);
+            monitor.name = 1;
+            monitor.weight = '90kg';
+            monitor.height = '2.00cm';
+            console.log('只能修改身高、体重');
+            console.log('拦截 _ 开头的', '_skill' in monitor);
+            console.log('name' in monitor);
+            delete monitor.name;
+            delete monitor.age;
+            console.log(monitor);
+            for (let key of Object.keys(monitor)) {
+                console.log('_ 除外都可遍历', key);
+            };
+        }
+    </script>
+</body>
+
+</html>

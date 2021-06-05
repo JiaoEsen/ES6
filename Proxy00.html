@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            let obj = {
+                name: '李四'
+            }
+            let monitor = new Proxy(obj, {
+                get(target, key, rec) {
+                    console.log(rec);
+                }
+            });
+            monitor.name;
+        } {
+            let obj = {
+                name: '李四'
+            }
+            let monitor = Object.create(obj, {
+                age: {
+                    value: 18,
+                    writable: false
+                },
+                sex: {value:'男'}
+            });
+            let m1 = Object.create(monitor);
+            console.log(m1.name == monitor);
+            console.log(m1.name == m1);
+        }
+    </script>
+</body>
+
+</html>

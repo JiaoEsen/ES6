@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style-type: none;
+        }
+
+        .box {
+            width: 500px;
+            border: 2px solid blue;
+            margin: 0 auto;
+        }
+
+        .list {
+            width: 100%;
+        }
+
+        .list li {
+            width: 100%;
+        }
+
+        .title {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: green;
+            cursor: pointer;
+        }
+
+        .list_box {
+            width: 100%;
+            height: 0;
+            transition: 1s;
+            overflow: hidden;
+        }
+
+        .list_box p {
+            display: block;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .list_box.active {
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="list">
+            <li>
+                <p class="title">一</p>
+                <div class="list_box active">
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                </div>
+            </li>
+            <li>
+                <p class="title">二</p>
+                <div class="list_box">
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                </div>
+            </li>
+            <li>
+                <p class="title">三</p>
+                <div class="list_box">
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        let titles = document.querySelectorAll('.title');
+        titles.forEach((item, index) => {
+            item.onclick = function () {
+                document.querySelectorAll('.list_box').forEach(element => {
+                    element.classList.remove('active');
+                });
+                item.parentNode.querySelector('.list_box').classList.add('active');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        setCookie('name', 'jiaoyisen', 2);
+
+        console.log(getCookie('name'));;
+
+        removeCookie('name');
+        //设置cookie
+        function setCookie(key, val, t) {
+            var date = new Date();
+            date.setDate(date.getDate() + t);
+            document.cookie = key + '=' + val + ';expires=' + date.toGMTString();
+        }
+
+        // 获取cookie
+        function getCookie(key) {
+            var cookie = document.cookie;
+            var cookieStr = cookie.split(';');
+            console.log(cookieStr);
+            for (var i = 0; i < cookieStr.length; i++) {
+                var s = cookieStr[i].split('=');
+                if (key == s[0]) {
+                    return s[1]
+                }
+            }
+        }
+
+        // 删除cookie
+        function removeCookie(key) {
+            setCookie(key, '', -1);
+        }
+    </script>
+</body>
+
+</html>

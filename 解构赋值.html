@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            let [a = 100, b, c, d = 4] = [1, 2, 3];
+            console.log(a, b, c, d);
+        } {
+            let [a = 1, b = 2, c = 3, d = 4] = [null, undefined, 33, ''];
+            console.log(a, b, c, d);
+        } {
+            let [a, b] = [1, 2, 3, 4];
+            console.log(a, b);
+        } {
+            let a = 1;
+            let b = 2;
+            [a, b] = [b, a];
+            console.log(a, b);
+        } {
+            let {
+                d: height,
+                a: age,
+                b: name,
+                c: sex
+            } = {
+                d: 180,
+                a: 18,
+                b: '焦意森',
+                c: '男'
+            };
+            console.log(name, age, sex, height);
+        } {
+            let {
+                a,
+                b = 5
+            } = {
+                a: 1
+            }
+            console.log(a, b);
+        } {
+            let [a, b, c] = 'hello';
+            console.log(a, b, c);
+        } {
+            let obj = {
+                p: ['hello', {
+                    y: 'world'
+                }]
+            }
+
+            /*    let x = obj.p[0];
+               let y = obj.p[1].y; */
+
+            let {
+                p: [x, {
+                    y
+                }]
+            } = obj;
+            console.log(x, y);
+        } {
+            let {
+                toString: fn
+            } = true;
+            console.log(fn);
+        }
+
+        {
+            let metaData = {
+                title: 'abc',
+                test: {
+                    title: 'test',
+                    desc: '详情'
+                }
+            }
+
+            let {
+                title: a,
+                test: {
+                    title: b,
+                    desc
+                }
+            } = metaData;
+            console.log(a, b);
+        } {
+            let data = {
+                arr: [1, 2, 3, 4],
+                str: 'abc',
+                arr1: [{
+                    name: '111'
+                }]
+            }
+
+            let {
+                arr: a,
+                str,
+                arr1: [{
+                    name
+                }]
+            } = data;
+
+            console.log(a);
+        }
+    </script>
+</body>
+
+</html>

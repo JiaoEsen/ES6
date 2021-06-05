@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 父类
+        function Father(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        // 子类
+        function Child(name, age, sex) {
+            // Father.call(this, name, age);
+            // Father.apply(this,[name,age]);
+            Reflect.apply(Father, this, [name, age]);
+            // 子类可以在父类的基础上扩展
+            this.sex = sex;
+        }
+
+        let son = new Child('侯一', 20, '不详');
+        console.log(son);
+        let f = new Father('侯二', 18);
+        console.log(f);
+    </script>
+</body>
+
+</html>

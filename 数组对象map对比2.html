@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            let aa = { 'a': 1 };
+            let arr = [{ a: 1 }];
+            let obj = { a: 1 };
+            let set = new Set();
+            set.add(aa);
+            let map = new Map();
+            map.set('a', 1);
+
+            // 查
+            let checkArr = arr.find(item => {
+                return item.a;
+            });
+            console.log('数组 的查询 <-------', checkArr);
+            let obj1 = 'a' in obj;
+            console.log('对象 的查询 <-------', obj1);
+            let set1 = set.has(aa);
+            console.log('set 的查询 <-------', set1);
+            let map1 = map.has('a')
+            console.log('map 的查询 <-------', map1);
+
+
+            // 改
+            let index = arr.findIndex(item => {
+                return item.a;
+            });
+            arr[index].a = 2;
+            console.log('arr 的改 <------', arr);
+            obj.a = 2;
+            obj['a'] = 3;
+            console.log('obj 的改 <------', obj);
+            set.forEach(item => {
+                item.a = 2;
+            });
+            console.log('set 的改 <------', set);
+            map.set('a', 2);
+            console.log('map 的改 <------', map);
+
+            // 删
+            arr.splice(index, 1);
+            console.log('arr 的删除<------', arr);
+            delete obj.a
+            console.log('obj 的删除<------', obj);
+            set.delete(aa);
+            console.log('set 的删除<------', set);
+            map.delete('a');
+            console.log('map 的删除<------', map);
+
+
+
+        }
+    </script>
+</body>
+
+</html>

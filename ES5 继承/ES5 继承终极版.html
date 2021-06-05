@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Father(name, age, height, weight) {
+            this.name = name;
+            this.age = age;
+            this.height = height;
+            this.weight = weight;
+        }
+
+        Father.prototype.skill = function () {
+            let obj = {
+                name: this.name,
+                age: this.age,
+                height: this.height,
+                weight: this.weight
+            }
+            console.log(obj);
+        }
+
+
+        function Child(name, age, height, weight, sex) {
+            Father.call(this, name, age, height, weight, sex);
+            this.sex = sex;
+        }
+    </script>
+</body>
+
+</html>

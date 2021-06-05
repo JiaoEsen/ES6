@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /*  class Father {
+             constructor(name = '侯一', age = 18) {
+                 this.name = name;
+                 this.age = age;
+             }
+             static skill() {
+                 console.log('我是父类的方法');
+             }
+         }
+ 
+ 
+         Father.skill();
+         // 静态方法 构造函数直接调用
+         // 普通方法 实例调用
+         
+ 
+         class Child extends Father {
+             constructor(name, age, sex) {
+                 // 用来塑造子类中的this
+                 super(name, age);
+                 this.sex = sex;
+             }
+             show() {
+                 console.log('我是子类扩展的方法');
+             }
+         }
+ 
+         console.log('子类实例', new Child('侯二', 10, '男')); */
+        /* 
+                class Father {
+                    constructor(x = 8) {
+                        this.x = x;
+                    }
+                    getX() {
+                        return this.x;
+                    }
+        
+                }
+        
+                class Child extends Father {
+                    constructor() {
+                        super()
+                        console.log(super.getX());
+                        console.log(super.x);
+                    }
+                }
+        
+                let child = new Child(); */
+
+        class Father {
+            static myMethod(msg) {
+                console.log('static', msg);
+            }
+            myMethod(msg) {
+                console.log('instance', msg);
+            }
+        }
+
+        class Child extends Father {
+            static myMethod(msg) {
+                super.myMethod(msg);
+            }
+            myMethod(msg) {
+                super.myMethod(msg);
+            }
+        }
+
+        Child.myMethod(1);
+        let child = new Child();
+        child.myMethod(2);
+    </script>
+
+</body>
+
+</html>

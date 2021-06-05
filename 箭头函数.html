@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            let add = function(a, b) {
+                return a + b;
+            }
+
+            add(1, 2);
+        } {
+            let add = a => a + 100;
+            console.log(add(1));
+        } {
+            let fn = (...arg) => {
+                // 箭头函数中没有 arguments参数 ，用rest参数代替 
+                console.log(arg);
+            }
+            fn(1, 2, 3, 4, 5);
+        } {
+            var a = 1;
+            const obj = {
+                a: 2,
+                getA: function() {
+                    console.log(this.a);
+                    setTimeout(function() {
+                        console.log(this.a);
+                    }, 1000);
+                }
+            }
+            obj.getA();
+        } {
+            var a = 1;
+            const obj = {
+                a: 2,
+                getA: () => {
+                    console.log(this);
+                    console.log(this.a);
+                    setTimeout(() => {
+                        console.log(this.a);
+                    }, 1000);
+                }
+            }
+            obj.getA();
+        } {
+            const obj = {
+                x: 1,
+                showA: () => {
+                    console.log(this.x);
+                }
+            }
+
+            obj.showA();
+        } {
+            function Timer() {
+                this.s1 = 0;
+                this.s2 = 0;
+                setInterval(() => {
+                    this.s1++;
+                }, 1000);
+
+                setInterval(function() {
+                    this.s2++;
+                }, 1000);
+            }
+
+            var timer = new Timer();
+            setTimeout(() => {
+                console.log(timer.s1);
+            }, 3100);
+            setTimeout(() => {
+                console.log(timer.s2);
+            }, 3100);
+        } {
+            let F = () => {
+
+                }
+                // 箭头函数 因为内部没有this，所以不能当构造函数使用 
+                // console.log(new F());
+        }
+    </script>
+</body>
+
+</html>

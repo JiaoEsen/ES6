@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function CreatePerson(name, age) {
+            this.name = name;
+            this.age = age;
+            this.skill = function () {
+                console.log(1);
+            }
+        }
+        CreatePerson.prototype.skill1 = function () {
+            console.log(this.name);
+        }
+
+        Reflect.set(CreatePerson.prototype, 'sex', '男');
+        Reflect.set(CreatePerson.prototype, 'aaa', function () {
+            console.log(1);
+        });
+
+        let obj1 = new CreatePerson('网二', 18);
+        let obj2 = new CreatePerson('nnn', 18);
+        console.log(obj1.sex);
+        obj1.aaa();
+        obj1.skill1();
+        obj2.skill1();
+        console.log(obj1);
+        console.log(obj1.skill1 === obj2.skill1);
+
+        // 总结： 封装面向对象程序的方式： 在构造函数内部写属性，在原型上写方法，在原型上写方法 共用
+    </script>
+</body>
+
+</html>

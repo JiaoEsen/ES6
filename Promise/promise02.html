@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fn1() {
+            console.log('a');
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        function fn2() {
+            console.log('b');
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        function fn3() {
+            console.log('c');
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        function fn4() {
+            console.log('d');
+        }
+
+        function promise(a) {
+            console.log(a);
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        // fn1().then(fn2).then(fn3).then(fn4);
+        /* promise('a').then(() => {
+            promise('b').then(() => {
+                promise('c').then(() => {
+                    promise('d');
+                })
+            })
+        }) */
+
+        promise('a').then(() => {
+            return promise('b');
+        }).then(() => {
+            return promise('c');
+        }).then(() => {
+            return promise('d');
+        });
+    </script>
+</body>
+
+</html>

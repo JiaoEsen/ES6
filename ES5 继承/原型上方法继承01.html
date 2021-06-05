@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(window.location.port);
+        function Father(age) {
+            this.age = age;
+        }
+/* 
+        Father.prototype.skill = function () {
+            console.log('我是Father的技能：', 1);
+        } */
+
+
+        // 拿普通对象替换源对象 会弄丢constructor 属性，需要重新添加
+        Father.prototype = {
+            skill: function () {
+                console.log(1);
+            },
+            constructor:Father
+        }
+
+        let f = new Father(18);
+        console.log(f);
+
+        function Child(age) {
+            // 属性继承
+            Father.call(this, age);
+        }
+    </script>
+</body>
+
+</html>

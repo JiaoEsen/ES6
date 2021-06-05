@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        {
+            let arr = [1, 2, 4, 5];
+            console.log(typeof arr);
+            console.log(arr instanceof Array);
+            console.log(Array.isArray(arr));
+
+            console.log(Array.of(1, 2, 3, undefined, null, '6', {
+                name: "焦意森"
+            }));
+
+            let aDivs = document.getElementsByTagName('div');
+            console.log(aDivs);
+
+            let aDivs1 = [...aDivs];
+            console.log(aDivs1);
+
+            let arr1 = Array.from(aDivs);
+            arr1.push(1);
+            console.log(arr1);
+        } {
+
+            // 将可遍历的对象转换成数组
+            // 将可遍历的对象转换成数组
+            let obj = {
+                0: 'a',
+                1: 'b',
+                2: 'c',
+                length: 3
+            }
+
+            let arr = Array.from(obj, function(item) {
+                return item + 100;
+            });
+            console.log(arr);
+        } {
+            let arr = ['a', 'b', 'c', 'd'];
+            arr.fill(5, 1, arr.length);
+            console.log(arr);
+        } {
+            let arr = ['a', 'b', 'c', 'd'];
+            arr.copyWithin(0, 2);
+            console.log(arr);
+        } {
+            let arr = [1, 2, 3, 4, 5];
+            console.log(arr.copyWithin(0, -2, -1))
+        } {
+            console.log([].copyWithin.call({
+                length: 5,
+                3: 1
+            }, 0, 3));
+
+        } {
+            let arr = ['a', 'b', 'c'];
+            /* for (let key of arr.keys()) {
+                console.log(key);
+            } */
+
+            /* for (let value of arr.values()) {
+                console.log(value);
+            } */
+
+            for (let [key, val] of arr.entries()) {
+                console.log(key, val);
+            }
+        } {
+            let arr = [1, 1, 200, 50, 101, 43, 10000, 111];
+            /* let arr1 = arr.find(function (item) {
+                 return item > 100;
+             }); */
+
+            let arr1 = arr.filter(function(item) {
+                return item > 100;
+            });
+
+            let _index = arr.findIndex(function(item) {
+                return item > 100;
+            });
+            console.log(_index);
+
+            console.log(arr.includes(1));
+        }
+    </script>
+</body>
+
+</html>

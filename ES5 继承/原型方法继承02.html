@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Father(name) {
+            this.name = name;
+        }
+        Father.prototype.skill = function () {
+            console.log('我是父类', '我叫徐雪丰');
+        }
+        function F() { }
+        F.prototype = Father.prototype;
+
+        function Child(name) {
+            Father.call(this, name);
+        }
+
+        // ①
+        // 子类原型：Child.prototype { constructor:...,__proto__:... }
+        // 父类原型：Father.prototype { constructor:...,__proto__:...,slill:... }
+        // 拿父类原型对象覆盖子类原型对象 
+        // 共享一块内存
+        /* Child.prototype = Father.prototype;
+        console.log('子类实例', new Child().skill());
+
+        // 子类扩展方法
+        Child.prototype.show = function () {
+            console.log('我是子类扩展出来的方法');
+        }
+
+        console.log('子类实例', new Child());
+        console.log('父类实例', new Father());
+        // 缺点： 子类改变会影响到父类 */
+
+
+
+        /* // ② 遍历父类的所有方法加到子类身上
+        for (let [k, v] of Object.entries(Father.prototype)) {
+            Child.prototype[k] = v;
+        }
+        Father.prototype.show = function () { }
+        console.log('子类实例', new Child());
+        console.log('父类实例', new Father());
+        // 缺点： 父类改变没有影响到子类 */
+
+
+        // ③ 让子类的原型 = 父类的实例
+        /*  let f = new Father('侯大');
+         Child.prototype = f;
+         // console.log(Child.prototype);
+         // 添加子类的 constructor 属性
+         Child.prototype.constructor = Child;
+         console.log(Child.prototype);
+         let son = new Child('侯一');
+         son.skill();
+         // 子类改变不会影响到父类
+         // 父类改变会影响到子类
+         Father.prototype.show = function () {
+             alert(1);
+         }
+         console.log('子类的实例', son);
+         console.log('父类的实例', new Father()); */
+        // let father = new Father();
+        // father.show();
+        // son.show();
+        // 缺点： 子类的原型上面出现了属性
+
+
+
+        // 终极版
+        Child.prototype = new F();
+        Child.prototype.constructor = Child;
+
+        const c = new Child('张三');
+        console.log(c);
+        
+        // 根据原型链查找属性和方法的过程叫做原型链
+        // console.log('子类原型对象',Child.prototype);
+        // console.log();
+        //  父类改变 子类变化
+        /*  Child.prototype.show = function () {
+             console.log('我是父类xinzhe');
+         }
+ 
+         //  console.log();
+         const son = new Child();
+         const father = new Father('李四'); */
+        // father.show();
+        console.log();
+
+
+        // new Father().show();
+        // new Father().show();
+        // Child.prototyp
+
+
+    </script>
+</body>
+
+</html>

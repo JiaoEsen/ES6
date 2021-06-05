@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <button class="btn">111</button>
+    <script src="./jquery-3.5.1.min.js"></script>
+    <script>
+        document.querySelector('.btn').onclick = function() {
+            jsonp();
+        };
+
+        function jsonp() {
+            // var oS = document.createElement('script');
+            // oS.type = 'text/javascript';
+            // oS.src = 'https://suggest.taobao.com/sug?q=%E4%BD%A0&callback=handleCallback';
+            // document.body.appendChild(oS);
+
+
+            $.ajax({
+                // 请求地址
+                url: "https://suggest.taobao.com/sug",
+                // 方式
+                type: "GET",
+                // 需要携带的参数
+                data: {
+                    q: 'f'
+                },
+                // 可以通过改参数 将函数传递到后台
+                jsonp: 'callback',
+                // 返回数据格式
+                dataType: 'jsonp',
+                success: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+
+        function handleCallback(res) {
+            console.log(res);
+        }
+    </script>
+</body>
+
+</html>

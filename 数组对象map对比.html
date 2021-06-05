@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            let arr = [{ a: 1 }];
+            let obj = { a: 1 };
+            let set = new Set();
+            set.add({ 'a': 1 });
+            let map = new Map();
+            map.set('a', 1);
+
+            // 如何将各结构中的a属性存的值变由1变为2
+
+            //改变 数组的值
+            arr.forEach((item, index) => {
+                item.a == item.a ? item.a = 2 : '';
+            });
+            // 改变对象的值
+            obj.a = 2;
+            // 改变map的值
+            map.set('a', 2);
+            // 改变 set 的值
+            set.forEach(item => {
+                console.log(item.a);
+                item.a == item.a ? item.a = 2 : '';
+            });
+            console.log(set);
+            // 如何查询各结构中是否含有a属性
+            // set
+            console.log(set.has('a'));
+            // map
+            console.log(map.has('a'));
+            // arr
+            let arr2 = arr.find(item => item.a);
+            console.log(arr2);
+
+            // 如何删除各结构中的a属性
+            // set
+            set.forEach(item => item.a ? set.delete(item):'');
+            console.log('删除set：',set);
+            // map
+            console.log('删除map：', map.delete('a'));
+            // object
+            delete obj.a;
+            console.log('删除之后的对象：', obj);
+            // arr
+            let _index = arr.findIndex((item) => {
+                return item.a;
+            });
+            arr.splice(_index, 1);
+            console.log('删除之后的数组：', arr);
+
+        }
+    </script>
+</body>
+
+</html>

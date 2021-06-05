@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 原对象
+        let obj = {
+            name: '农夫山泉',
+            address: '中国长白山',
+            date: '2018-1-1',
+            price: '￥0.5'
+        }
+
+        // 创建代理商 
+        let monitor = new Proxy(obj, {
+            // 拦截属性的访问操作
+            get(target, key) {
+                if (key == 'date') {
+                    return target[key].replace('2018', '2021');
+                } else {
+                    return target[key];
+                }
+            },
+            // 拦截属性的设置
+            set(target, key, value) {
+                // 只允许改名字
+                switch (key) {
+                    case 'name':
+                        target['name'] = value;
+                        break;
+                    default:
+                        return target[key];
+                        break;
+                }
+            },
+            //拦截查询某个属性的操作 in操作符
+            has(target, key) {
+                if (key === 'price') {
+                    return false;
+                } else {
+                    return key in target;
+                }
+            },
+            // 拦截遍历操作符
+            ownKeys(target) {
+                return Object.keys(target).filter(item => {
+                    return item !== 'price';
+                });
+            },
+            // 拦截属性的删除操作
+            deleteProperty(target, key) {
+                if (key === 'address') {
+                    delete target[key];
+                } else {
+                    return false;
+                }
+            }
+        });
+        console.log(monitor.name);
+        monitor.name = '恒大冰泉';
+        monitor.address = '北工商井水';
+        console.log('名字：', monitor.name);
+        console.log('产地：', monitor.address);
+        console.log('name' in monitor);
+        for (let key of Object.keys(monitor)) {
+            console.log(key);
+        }
+
+        for (let key in monitor) {
+            console.log(key);
+        }
+        console.log(monitor);
+        delete monitor.name
+        delete monitor.address
+        console.log(monitor);
+    </script>
+</body>
+
+</html>

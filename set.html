@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            // Set 结构
+            let s = new Set();
+            s.add(1).add(2).add(3);
+            console.log('set 结构：', s);
+            // 可以转成数组
+            console.log('转为数组：', Array.from(s));
+
+        } {
+            // 定义 set 结构
+            let arr = [1, 2, 2, 4, 5];
+            let s = new Set(arr);
+            console.log(s);
+        } {
+            let arr = [1, 2, 3, 2, 23, 4, 23, 1];
+            let s = new Set(arr);
+            console.log('原数组：', arr);
+            console.log('去重之后：', s);
+            //1
+            console.log([...new Set(arr)]);
+
+
+            //2
+            let newArr = [];
+            arr.forEach(item => {
+                if (!newArr.includes(item)) {
+                    newArr.push(item);
+                }
+            });
+            console.log(newArr);
+
+            //3
+            let newArr1 = arr.filter((item, index) => {
+                // 找到所有第一次出现的元素
+                return arr.indexOf(item) == index;
+            });
+            console.log(newArr1);
+        } {
+            let s = new Set(['a', 'b', 'c']);
+            s.add('d');
+            // 添加元素
+            console.log(s);
+            // 查询是否包含某一个元素
+            console.log(s.has('b'));
+            // 删除某一个元素
+            // console.log(s.delete('c'));
+            // 清空元素
+            console.log('set长度：', s.size);
+            // console.log(s.clear());
+            console.log(s);
+        } {
+            // set遍历
+            let s = new Set(['a', 'b', 'c', 'd']);
+            s.forEach((item, index) => {
+                console.log(index, item);
+            });
+
+            // keys() values() entries()
+            for (let [key, val] of s.entries()) {
+                console.log('键：', key, '值：', val);
+            }
+        } {
+            /* 
+                1. set内部没有重复元素 自带去重
+            */
+        }
+    </script>
+</body>
+
+</html>

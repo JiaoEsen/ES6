@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Father(name) {
+            this.name = name;
+        }
+
+        Father.prototype.skill = function () {
+            console.log('我是父类的技能！！！', this.name);
+        }
+
+        function F() { };
+        F.prototype = Father.prototype;
+
+        function Child(name) {
+            Father.call(this, name);
+        }
+
+        Child.prototype = new F();
+        Child.prototype.constructor = Child;
+        Child.prototype.show = function () {
+            console.log('我是子类新增技能');
+        }
+
+        const son = new Child('侯一');
+        son.skill();
+
+        console.log(Child.prototype);
+        console.log(Father.prototype);
+
+
+    </script>
+</body>
+
+</html>

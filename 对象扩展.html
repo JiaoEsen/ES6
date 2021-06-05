@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            var a = 'age';
+            var es5 = {
+                a: a,
+                showA: function() {
+                    console.log(this.a);
+                }
+            }
+            es5.showA();
+        } {
+            const a = 'age';
+            var age1 = 20;
+            const es6 = {
+                a,
+                ['age' + 1]: age1, // 不能简写
+                [{}]: 1,
+                showA() {
+                    console.log(this.a);
+                }
+            }
+            console.log(es6);
+            es6.showA();
+        } {
+            const obj = {
+                a: 1,
+                b: 2
+            };
+            Object.defineProperty(obj, 'age', {
+                value: 18,
+                // writable: false,
+                // enumerable: true,
+                // configurable: true,
+            });
+            // 查询对象的某个对象的属性描述对象
+            console.log(Object.getOwnPropertyDescriptor(obj, "age"));
+            console.log(Object.getOwnPropertyDescriptor(obj, "a"));
+            console.log('>------ 未修改前 ', obj.age);
+            // obj.age = 20;
+            delete obj.age;
+            console.log('>------ 修改后 ', obj);
+            for (let key in obj) {
+                console.log(key);
+            }
+            // getOwnPropertyDescriptor
+        } {
+            const obj = {};
+            // a 不可以修改 b 不可以删除
+            Object.defineProperties(obj, {
+                'a': {
+                    value: 1,
+                    writable: false,
+                    enumerable: true,
+                    configurable: true
+                },
+                'b': {
+                    value: 2,
+                    writable: true,
+                    enumerable: true,
+                    configurable: false
+                },
+                'c': {
+                    get() {
+                        return value;
+                    }, // obj.c => 会触发get函数
+                    set(v) { // obj.c = 值 触发get函数，值会当成set函数的参数
+                        if (v >= 18) {
+                            value = '可以考取机动车驾驶证';
+                        } else {
+                            value = '不可以考取机动车驾驶证';
+                        }
+                    }
+                }
+
+            });
+            obj.c = 17;
+            console.log(obj.c);
+
+            obj.a = 11;
+            delete obj.b;
+
+            console.log(obj);
+            for (let key in obj) {
+                console.log(key);
+            }
+        } {
+            const obj = {
+                // level
+                // 取值函数
+                get level() {
+                    return a;
+                },
+                // 赋值函数
+                set level(v) {
+                    switch (v) {
+                        case '龙':
+                            a = '总经理';
+                            break;
+                        case '班副':
+                            a = '组长';
+                            break;
+                        case '宁':
+                            a = '组员';
+                            break;
+                        default:
+                            a = '暂无职位';
+                            break;
+                    }
+                }
+            }
+            obj.level = '班副';
+
+            console.log(obj.level);
+        } {
+            /* 
+                对象的扩展
+                定义对象属性的方法：obj.属性 obj[属性]
+                    obj = {['属性']:值}
+                    Object.defineProperty()
+                    Object.defineProperties()
+                    作用： 
+                        可以设置外界对该属性的操作
+                    取值、赋值函数
+                        作用： 
+                            根据设置的属性可以返回不同的内容
+            */
+        } {
+            let obj = {
+                a: 1
+            }
+            Object.defineProperty(obj, 'b', {
+                value: 2,
+                enumerable: false
+            });
+
+            for (let key of Object.keys(obj)) {
+                console.log(key);
+            }
+            for (const [k, v] of Object.entries(obj)) {
+                console.log(k, v);
+            }
+        } {
+            const obj = {
+                skill() {},
+                set age(v) {
+                    value = v;
+                },
+                get age() {
+                    return value;
+                }
+            }
+
+            console.log(obj.skill.name);
+            // 拿到属性描述对象
+            const desObj = Object.getOwnPropertyDescriptor(obj, 'age');
+            console.log(desObj.get.name);
+            console.log(desObj.set.name);
+        } {
+            let obj =  {
+                name:'zhangsan',
+                sayName(){
+                    console.log(this.name);
+                    return 1;
+                }
+            }
+
+            console.log(obj.sayName());
+            console.log(obj.sayName.name);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box,
+        .box1 {
+            float: left;
+            width: 800px;
+            border: 2px solid blue;
+        }
+
+        .tab_btn {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            display: -webkit-flex;
+            border-bottom: 2px solid blue;
+        }
+
+        .tab_btn span {
+            width: calc(100%/4);
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-right: 2px solid blue;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-size: 30px;
+        }
+
+        .tab_btn span:last-child {
+            border-right: none;
+        }
+
+        .tab_btn span.active {
+            background: blue;
+            color: #fff;
+        }
+
+        .tab_car {
+            width: 100%;
+            height: 500px;
+            position: relative;
+        }
+
+        .tab_car div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 500px;
+            line-height: 500px;
+            text-align: center;
+            font-size: 100px;
+            display: none;
+            /* background: skyblue; */
+        }
+
+        .tab_car div.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div class="tab_btn">
+            <span class="active">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </div>
+        <div class="tab_car">
+            <div class="show">1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </div>
+    </div>
+
+    <div class="box1" id="box">
+        <div class="tab_btn">
+            <span class="active">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </div>
+        <div class="tab_car">
+            <div class="show">1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </div>
+    </div>
+    <script>
+        // 属性： 按钮和切换内容
+        function Tab(btns, contents) {
+            this.btns = btns;
+            this.contents = contents;
+            this.change();
+        }
+
+        // 切换对应的盒子
+        Tab.prototype.change = function () {
+            this.btns.forEach((item, index) => {
+                item.onclick = () => {
+                    // 切换类
+                    this.toggleClass(this.btns, 'active', index);
+                    this.toggleClass(this.contents, 'show', index);
+                }
+            });
+        }
+
+        Tab.prototype.toggleClass = function (els, cname, _index) {
+            els.forEach(item => {
+                item.classList.remove(cname);
+            });
+            // 给当前的添加样式
+            els[_index].classList.add(cname);
+        }
+
+        let btns = document.querySelectorAll('.box .tab_btn span');
+        let cars = document.querySelectorAll('.box .tab_car div');
+        let tab = new Tab(btns, cars);
+
+        let btns1 = document.querySelectorAll('.box1 .tab_btn span');
+        let cars1 = document.querySelectorAll('.box1 .tab_car div');
+        let tab1 = new Tab(btns1, cars1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*  var oTab = new CreateTab('box');
+         function CreateTab(id) {
+             var box = document.getElementById(id);
+             this.tabBtn = box.querySelectorAll('.tab_btn span');
+             this.tabCar = box.querySelectorAll('.tab_car div');
+             var _this = this;
+             for (var i = 0; i < this.tabBtn.length; i++) {
+                 this.tabBtn[i].index = 1;
+                 this.tabBtn[i].onclick = function () {
+                     _this.tab(this);
+                     console.log(this);
+                 }
+             }
+         }
+
+         CreateTab.prototype.tab = function (tabBtn) {
+             for (var i = 0; i < this.tabBtn.length; i++) {
+                 this.tabBtn[i].className = '';
+                 this.tabCar[i].className = '';
+             }
+             tabBtn.className = 'active';
+             this.tabCar[tabBtn.index].className = 'active';
+         }
+
+         CreateTab.prototype.a = {}; */
+    </script>
+</body>
+
+</html>

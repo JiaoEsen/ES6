@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <div></div>
+    </div>
+    <script>
+        { // 链判断运算符
+            const obj = {
+                name: 'zhangsan',
+                age: {
+                    value: 18
+                }
+            }
+            const obj1 = {
+                name: 'lisi'
+            }
+
+            function fn(person) {
+                /*  if (person.age) {
+                     return person.age.value + 5;
+                 } else {
+                     return;
+                 } */
+                return person?.age?.value + 5;
+            }
+            console.log(fn(obj));
+            console.log(fn(obj1));
+        } {
+            function move(fn) {
+                // fn && fn();
+                fn?.();
+            }
+            move(function () {
+                console.log(1);
+            })
+            move();
+        } {
+            const obj = {};
+            console.log(obj.a || 1);
+            console.log(obj.a ?? 2);
+        } {
+            let [a, b] = [1, '1'];
+            console.log(Object.is(a, b));
+
+            let [c, d] = [+0, -0];
+            console.log(c === d);
+            console.log(Object.is(c, d));
+        } {
+            const obj1901 = {
+                a: 1,
+                b: 2
+            }
+
+            const obj1909 = {
+                c: 3,
+                d: 4
+            }
+
+            Object.defineProperty(obj1909, 'g', {
+                value: 7,
+                enumerable: true
+            });
+
+            const obj1902 = {
+                e: {
+                    num: '$600W'
+                },
+                f: 6
+            }
+
+            const obj1908 = {
+                e: { counts: '￥100亿' }
+            }
+
+            const obj1907 = {
+                get m() {
+                    return 7;
+                }
+            }
+
+            Object.assign(obj1901, obj1909, obj1902, obj1908, [1, 2, 4, 5], obj1907);
+            obj1902.e.num = '$800W'
+            console.log(obj1901);
+        } {
+            const arr = [['a', 1], ['b', 2]];
+            const obj = Object.fromEntries(arr);
+            console.log(obj);
+        }
+    </script>
+</body>
+
+</html>

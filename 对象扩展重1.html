@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            // 对象的简洁表示法
+            const name = '焦意森';
+            let es5 = {
+                name: name,
+                showA: function () {
+                    console.log('ES5', this.name);
+                }
+            }
+            let es6 = {
+                name,
+                showA() {
+                    console.log('ES6', this.name);
+                }
+            }
+
+            console.log(es5.showA());
+            console.log(es6.showA());
+        } {
+            // Object.de
+            let arr = [1, 2, 3, 4];
+            let arr1 = [4, 5]
+            Object.assign(arr, arr1);
+            // Object.de
+            console.log(arr);
+        } {
+            let obj = { name: 'jiao', age: 18 };
+            Object.defineProperty(obj,'age',{
+                enumerable:false
+            });
+            // console.log(Object.getOwnPropertyDescriptor(obj,'name','age'));
+            // console.log(Object.getOwnPropertyDescriptor(obj,'age'));
+            for (let [key, val] of Object.entries(obj)) {
+                console.log(get(obj, key));
+            }
+
+            // Object.
+            function get(obj, key) {
+                return Object.getOwnPropertyDescriptor(obj, key);
+            }
+        }
+    </script>
+</body>
+
+</html>

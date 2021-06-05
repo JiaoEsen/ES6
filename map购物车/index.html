@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            width: 500px;
+            display: flex;
+            display: -webkit-flex;
+        }
+
+        .books_name,
+        .add_cart,
+        .books_price {
+            width: 30%;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        .books_price {
+            width: 20%;
+        }
+
+        .add_cart {
+            width: 30%;
+        }
+
+        .cart_list li {
+            width: 800px;
+            line-height: 50px;
+        }
+
+        .cart_list li .counts {
+            width: 30%;
+            height: 100%;
+        }
+
+        .cart_list li .del {
+            width: 15%;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="list">
+            <li data-id="book01">
+                <span class="books_name">唐诗三百首</span>
+                <span class="books_price">12.50</span>
+                <span class="add_cart">加入购物车</span>
+            </li>
+            <li data-id="book02">
+                <span class="books_name">JavaScript 权威指南</span>
+                <span class="books_price">99.00</span>
+                <span class="add_cart">加入购物车</span>
+            </li>
+            <li data-id="book03">
+                <span class="books_name">Java 核心</span>
+                <span class="books_price">99.98</span>
+                <span class="add_cart">加入购物车</span>
+            </li>
+        </ul>
+        <h1>我的购物车</h1>
+        <ul class="cart_list">
+
+        </ul>
+    </div>
+    <script>
+        let addCart = [...document.querySelectorAll('.add_cart')];
+        let cartMap = new Map(JSON.parse(localStorage.getItem('books'))) || new Map();
+        const books = 'books';
+        cart(cartMap);
+        addCart.forEach((item, index) => {
+            item.onclick = function (e) {
+                let bookId = this.parentNode.getAttribute('data-id');
+                let bookName = this.parentNode.querySelector('.books_name').innerHTML;
+                let bookPrice = Number.parseFloat(this.parentNode.querySelector('.books_price').innerHTML);
+                if (cartMap.has(bookId)) {
+                    cartMap.get(bookId).counts++;
+                } else {
+                    let cartObj = {
+                        bookId: bookId,
+                        bookName: bookName,
+                        bookPrice: bookPrice,
+                        counts: 1
+                    }
+                    cartMap.set(bookId, cartObj);
+                }
+                setStorage(books, cartMap.entries());
+                cart(cartMap);
+                return false;
+            }
+        });
+
+        document.querySelector('.cart_list').onclick = function (e) {
+            var e = e || window.event;
+            let id = getId(e.target.parentNode);
+            console.log(id);
+            if (cartMap.has(id)) {
+                cartMap.delete(id);
+            }
+            setStorage(books, cartMap.entries());
+            cart(cartMap);
+        };
+
+
+        function cart(arr) {
+            if (!arr.size == 0) {
+                document.querySelector('.cart_list').innerHTML = '';
+                arr.forEach(item => {
+                    document.querySelector('.cart_list').innerHTML += `<li data-id=${item.bookId}>
+                <span class="books_name">书名：${item.bookName}</span>
+                <span class="books_price">单价：${item.bookPrice}</span>
+                <span class="counts">数量：${item.counts}</span>
+                <span class="total_price">${(item.counts * item.bookPrice).toFixed(2)}</span>
+                <span class="del">删除</span>
+            </li>`;
+                });
+            } else {
+                document.querySelector('.cart_list').innerHTML = '<span>购物车为空</span>';
+            }
+        }
+
+        function getId(el) {
+            return el.getAttribute('data-id');
+        }
+
+        function setStorage(k, v) {
+            localStorage.setItem(k, JSON.stringify(Array.from(v)));
+        };
+
+    </script>
+</body>
+
+</html>

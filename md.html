@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            // 判断是否为数组
+            let arr = [1, 2, 3, 4, 5, 6];
+            // console.log(arr.constructor.name === 'Array');   
+            // constructor
+            // console.log(Array.isArray(arr)); // true
+
+            // console.log(arr instanceof Array); // true
+        } {
+            let arr = [1, 2, 3, 4, 5, 6];
+            console.log(arr instanceof Array);
+            console.log(Array.isArray(arr));
+            console.log(arr.constructor.name === 'Array');
+
+            Array.from(); // 将伪数组转换成数组
+            Array.of(); // 将一组数据转换成数组
+            includes() // 判断数组中是否含有某一项
+            find() // 找到第一项符合条件的项
+            findIndex(); // 找到符合条件的第一项所在的位置
+            fill(); // 给定一个值，填充数组
+            copyWithin(); // 复制
+
+            String.codeP0intAt() // 返回对应字符的 unicode编码
+            String.fromCodePoint() // 返回编码对应的字符
+            includes() // 判断字符串中是否含有某个字符
+            startsWith() // 以某些字符起始
+            endsWith() // 以某些字符结束
+            repeat() // 返回一个新串 表示将原串重复几次
+
+                instanceof
+                Array.isArray();
+            constructor
+
+            let fn = () => { }
+            let fn = a => a; // 如果只有一个参数 可以不写小括号，只有一句表达式可以简写
+            // 箭头函数this 就是在定义时所在的对象 不是使用时候的对象
+            // 箭头函数没有arguments，如果要使用可以使用 rest 代替
+            // 不可以当作构造函数 也就是不可以使用 new 命令 ，如果使用 会抛出一个错误
+            // 不可以 使用 yield命令 不可以当作 generator函数
+
+            /*
+             定义对象的属性  
+                Object.defineProperty(obj,prop,descriptor);
+             */
+
+            /* 
+                判断一个变量是否是数组
+                Array.isArray();
+                arr instanceof Array;
+                arr.constructor.name === Array
+            */
+
+            /* 
+
+            */
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .banner {
+            position: relative;
+            width: 743px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .banner .bnr_box {
+            width: calc(743px*6);
+            overflow: hidden;
+        }
+
+        .bnr_box_item {
+            width: 743px;
+            float: left;
+        }
+
+        .nav_box {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .nav_box div {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.5s;
+        }
+
+        .nav_box div.active {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .next,
+        .prev {
+            position: absolute;
+            top: 50%;
+            width: 70px;
+            height: 70px;
+            margin-top: -35px;
+            background: url(./images/banner_arrow.png) no-repeat;
+        }
+
+        .next {
+            right: 0;
+            background-position: left bottom;
+        }
+
+        .prev {
+            left: 0;
+            background-position: left top;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner" id="banner">
+        <div class="bnr_box">
+            <div class="bnr_box_item"><a href="#"><img src="./images/0409HOME_Combo_KV_IM-GBM-KV_743X418.webp"
+                        alt=""></a></div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/2_IM_A52-LTE_Product-KV_PC_743x418.jpg" alt=""></a>
+            </div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/743-418-20210128-s21.webp" alt=""></a></div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/743-418-f52-gbm.webp" alt=""></a></div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/743-418-gbm-dianyingjie-20210528.webp" alt=""></a>
+            </div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/2.jpg" alt=""></a></div>
+        </div>
+        <div class="nav_box">
+            <div class="active"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <a href="javascript:;" class="next"></a>
+        <a href="javascript:;" class="prev"></a>
+    </div>
+
+
+    <script>
+    </script>
+</body>
+
+</html>

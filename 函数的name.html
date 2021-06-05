@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            function fn() {
+
+            }
+            console.log(fn.name);
+        } {
+            let fn = function() {};
+            console.log(fn.name);
+        } {
+            let fn = function fn1() {};
+            console.log(fn.name);
+        } {
+            let fn = new Function(); // anonymous 匿名的
+            console.log(fn.name);
+        } {
+            let obj1 = {
+                x: 3
+            }
+            let obj2 = {
+                x: 5,
+                showX: function() {
+                    console.log(this.x);
+                }
+            }
+
+            // obj2.showX.call(obj1);
+            // obj2.showX.apply(obj1);
+            obj2.showX.bind(obj1)();
+        }
+    </script>
+</body>
+
+</html>

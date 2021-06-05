@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            let obj = {
+                a: 1,
+                b: 2,
+                c: 3,
+                d: 1,
+                e: 3,
+                f: 4
+            };
+            let arr = Object.values(obj);
+            let index = 0;
+            let newArr = [];
+            while (index < arr.length) {
+                newArr.push(arr.slice(index, index += 3));
+            };
+            console.log(newArr);
+
+            newArr[0] = newArr[0].reduce((num, item) => {
+                return num + item;
+            });
+            newArr[1] = newArr[1].reduce((num, item) => {
+                return num + item;
+            });
+            console.log(newArr);
+
+        } {
+            let arr = ['张三 男 23', '李四 女 18', '王二 男 35'];
+            let arr1 = arr.sort((a, b) => {
+                return a.split(' ').pop() - b.split(' ').pop();
+            })
+
+            console.log(arr1);
+        } {
+            /* 
+            3.1 素材文件homework.js中的数据为某位同学的假期作业提交记录。每项数据中，day为交作业的日期，type表示作业类型（edu为教育作业读后感，code为技术作业），file_name为提交的文件名称，file_name为空则说明当天这个类型的作业没有提交。
+            {
+                "id": 1068,
+                    "type": "edu",
+                        "day": "2021-03-10",
+                            "file_name": "IMG_20210309_190225.jpg"
+            }
+            编写算法，统计该同学的教育作业完成率和技术作业完成率。（15分）
+            评分标准：
+            1. 编程实现，统计该同学的教育作业完成率和技术作业完成率，即各类型作业的完成次数占作业总数的百分比，应该算出：教育作业100 %，技术作业68 %；（15分） */
+            /*  let json = [
+                 {
+                     "id": 1068,
+                     "type": "edu",
+                     "day": "2021-03-10",
+                     "file_name": ""
+                 }, {
+                     "id": 1069,
+                     "type": "edu",
+                     "day": "2021-03-11",
+                     "file_name": "IMG_20210309_190225.jpg"
+                 }, {
+                     "id": 1070,
+                     "type": "code",
+                     "day": "2021-03-12",
+                     "file_name": "IMG_20210309_190225.jpg"
+                 }, {
+                     "id": 1071,
+                     "type": "edu",
+                     "day": "2021-03-13",
+                     "file_name": "IMG_20210309_190225.jpg"
+                 },
+                 {
+                     "id": 1072,
+                     "type": "code",
+                     "day": "2021-03-14",
+                     "file_name": ""
+                 }
+             ] */
+
+            /* let arr1 = json.filter(item => {
+                return item.type == "edu";
+            });
+            console.log(arr1);
+
+            let arr2 = arr1.filter(item => {
+                return item.file_name != "";
+            });
+            console.log(arr2);
+
+            console.log(((arr1.length - 1) / 3) * 100); */
+            const list = [{
+                "id": 33,
+                "type": "edu",
+                "day": "2021-01-22",
+                "file_name": "STU1.22.jpg"
+            }, {
+                "id": 38,
+                "type": "code",
+                "day": "2021-01-22",
+                "file_name": ""
+            }, {
+                "id": 64,
+                "type": "edu",
+                "day": "2021-01-25",
+                "file_name": "IMG_20210125_183402.jpg"
+            }, {
+                "id": 65,
+                "type": "code",
+                "day": "2021-01-25",
+                "file_name": ""
+            }, {
+                "id": 96,
+                "type": "edu",
+                "day": "2021-01-26",
+                "file_name": "IMG_20210126_173234.jpg"
+            }, {
+                "id": 97,
+                "type": "code",
+                "day": "2021-01-26",
+                "file_name": "STU1-26.docx"
+            }, {
+                "id": 140,
+                "type": "edu",
+                "day": "2021-01-27",
+                "file_name": "IMG_20210127_183216.jpg"
+            }, {
+                "id": 141,
+                "type": "code",
+                "day": "2021-01-27",
+                "file_name": "STU1-27.docx"
+            }, {
+                "id": 177,
+                "type": "edu",
+                "day": "2021-01-28",
+                "file_name": "IMG_20210128_184344.jpg"
+            }, {
+                "id": 178,
+                "type": "code",
+                "day": "2021-01-28",
+                "file_name": "STU1-28.docx"
+            }, {
+                "id": 185,
+                "type": "edu",
+                "day": "2021-01-29",
+                "file_name": "IMG_20210129_132120.jpg"
+            }, {
+                "id": 204,
+                "type": "code",
+                "day": "2021-01-29",
+                "file_name": "STU.7z"
+            }, {
+                "id": 245,
+                "type": "edu",
+                "day": "2021-02-01",
+                "file_name": "IMG_20210202_172857.jpg"
+            }, {
+                "id": 247,
+                "type": "code",
+                "day": "2021-02-01",
+                "file_name": "STU2-1.docx"
+            }, {
+                "id": 271,
+                "type": "edu",
+                "day": "2021-02-02",
+                "file_name": "IMG_20210202_172900.jpg"
+            }, {
+                "id": 272,
+                "type": "code",
+                "day": "2021-02-02",
+                "file_name": "1.html"
+            }, {
+                "id": 291,
+                "type": "edu",
+                "day": "2021-02-03",
+                "file_name": "IMG_20210203_162614.jpg"
+            }, {
+                "id": 323,
+                "type": "edu",
+                "day": "2021-02-04",
+                "file_name": "IMG_20210204_165845.jpg"
+            }, {
+                "id": 324,
+                "type": "code",
+                "day": "2021-02-04",
+                "file_name": "STU2-4.docx"
+            }, {
+                "id": 394,
+                "type": "edu",
+                "day": "2021-02-08",
+                "file_name": "IMG_20210208_172734.jpg"
+            }, {
+                "id": 395,
+                "type": "code",
+                "day": "2021-02-03",
+                "file_name": ""
+            }, {
+                "id": 396,
+                "type": "edu",
+                "day": "2021-01-18",
+                "file_name": "IMG_20210215_163942.jpg"
+            }, {
+                "id": 397,
+                "type": "edu",
+                "day": "2021-02-05",
+                "file_name": "IMG_20210208_172548.jpg"
+            }, {
+                "id": 398,
+                "type": "code",
+                "day": "2021-02-05",
+                "file_name": ""
+            }, {
+                "id": 399,
+                "type": "code",
+                "day": "2021-02-08",
+                "file_name": "STU2-8.docx"
+            }, {
+                "id": 481,
+                "type": "edu",
+                "day": "2021-02-15",
+                "file_name": "IMG_20210215_163653.jpg"
+            }, {
+                "id": 483,
+                "type": "code",
+                "day": "2021-02-15",
+                "file_name": "STU2-15.docx"
+            }, {
+                "id": 487,
+                "type": "edu",
+                "day": "2021-01-19",
+                "file_name": "IMG_20210215_163948.jpg"
+            }, {
+                "id": 488,
+                "type": "edu",
+                "day": "2021-01-20",
+                "file_name": "IMG_20210215_163955.jpg"
+            }, {
+                "id": 490,
+                "type": "edu",
+                "day": "2021-01-21",
+                "file_name": "IMG_20210215_164213.jpg"
+            }, {
+                "id": 491,
+                "type": "code",
+                "day": "2021-01-18",
+                "file_name": "STU.ppt"
+            }, {
+                "id": 492,
+                "type": "code",
+                "day": "2021-01-19",
+                "file_name": "STU.zip"
+            }, {
+                "id": 493,
+                "type": "code",
+                "day": "2021-01-20",
+                "file_name": "STU1-20.zip"
+            }, {
+                "id": 494,
+                "type": "code",
+                "day": "2021-01-21",
+                "file_name": "STU1-21.docx"
+            }, {
+                "id": 603,
+                "type": "edu",
+                "day": "2021-02-23",
+                "file_name": "IMG_20210223_170725.jpg"
+            }, {
+                "id": 604,
+                "type": "code",
+                "day": "2021-02-23",
+                "file_name": "STU2-23.docx"
+            }, {
+                "id": 661,
+                "type": "edu",
+                "day": "2021-02-24",
+                "file_name": "IMG_20210224_165037.jpg"
+            }, {
+                "id": 662,
+                "type": "code",
+                "day": "2021-02-24",
+                "file_name": ""
+            }, {
+                "id": 727,
+                "type": "code",
+                "day": "2021-02-26",
+                "file_name": "SwitchBox.vue"
+            }, {
+                "id": 728,
+                "type": "edu",
+                "day": "2021-02-25",
+                "file_name": "IMG_20210226_132926.jpg"
+            }, {
+                "id": 729,
+                "type": "code",
+                "day": "2021-02-25",
+                "file_name": "STU2-25.docx"
+            }, {
+                "id": 790,
+                "type": "edu",
+                "day": "2021-03-01",
+                "file_name": "IMG_20210301_172023.jpg"
+            }, {
+                "id": 791,
+                "type": "code",
+                "day": "2021-03-01",
+                "file_name": "BlogBox.vue"
+            }, {
+                "id": 792,
+                "type": "edu",
+                "day": "2021-02-26",
+                "file_name": "IMG_20210301_172619.jpg"
+            }, {
+                "id": 838,
+                "type": "edu",
+                "day": "2021-03-02",
+                "file_name": "IMG_20210302_180859.jpg"
+            }, {
+                "id": 839,
+                "type": "code",
+                "day": "2021-03-02",
+                "file_name": ""
+            }, {
+                "id": 914,
+                "type": "edu",
+                "day": "2021-03-04",
+                "file_name": "IMG_20210304_191208.jpg"
+            }, {
+                "id": 916,
+                "type": "code",
+                "day": "2021-03-03",
+                "file_name": "Composition.vue"
+            }, {
+                "id": 915,
+                "type": "edu",
+                "day": "2021-03-03",
+                "file_name": "IMG_20210304_191204.jpg"
+            }, {
+                "id": 917,
+                "type": "code",
+                "day": "2021-03-04",
+                "file_name": ""
+            }, {
+                "id": 990,
+                "type": "edu",
+                "day": "2021-03-08",
+                "file_name": "IMG_20210308_175809.jpg"
+            }, {
+                "id": 992,
+                "type": "code",
+                "day": "2021-03-08",
+                "file_name": ""
+            }, {
+                "id": 1033,
+                "type": "edu",
+                "day": "2021-03-09",
+                "file_name": "IMG_20210309_190225.jpg"
+            }, {
+                "id": 1034,
+                "type": "code",
+                "day": "2021-03-09",
+                "file_name": ""
+            }, {
+                "id": 1068,
+                "type": "edu",
+                "day": "2021-03-10",
+                "file_name": "IMG_20210309_190225.jpg"
+            }, {
+                "id": 1069,
+                "type": "code",
+                "day": "2021-03-10",
+                "file_name": "STU3-10.docx"
+            }];
+
+            let code = 0;
+            let edu = 0;
+            list.forEach((item, index) => {
+                console.log(item.type);
+                if (item.type == 'code') {
+                    code += code;
+                }
+            })
+            console.log(code);
+
+            let arr1 = list.filter(item => {
+                return item.type == 'edu';
+            });
+
+            let arr2 = arr1.filter(item => {
+                return item.file_name == "";
+            });
+
+            console.log(arr1, arr2.length);
+
+            console.log((arr1.length - arr2.length) / arr1.length * 100);
+
+            let arr3 = list.filter(item => {
+                return item.type == 'code';
+            });
+
+            let arr4 = arr3.filter(item => {
+                return item.file_name == "";
+            });
+
+            // console.log(f(list, 'type', "code"));
+
+
+
+            console.log(Math.round((arr3.length - arr4.length) / arr3.length * 100) + '%');
+        }
+    </script>
+</body>
+
+</html>

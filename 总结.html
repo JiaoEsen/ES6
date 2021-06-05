@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            {
+                // 结构复制
+                [a, b, c] = [1, 2, 3];
+                console.log(a, b, c);
+            }
+            {
+                let { a, b, c } = { a: 1, b: 2, c: 3 }
+                console.log(a, b, c);
+            }
+        } {
+            {
+                //取对应字符的编码
+                let str = 'abcd';
+                console.log(str.codePointAt(0));
+                // 取编码对应的字符
+                console.log(String.fromCodePoint(97));
+                // 判断是否存在某个字符
+                console.log(str.includes('a'));
+                // 判断以某字符起始
+                console.log(str.startsWith('b'));
+                // 结尾
+                console.log(str.endsWith('d'));
+                // 将一个串重复几次
+                console.log(str.repeat(5));
+            }
+        } {
+            // 数组
+            // 静态方法
+            // 判断是否是一个数组
+            let arr = [1, 2, 3, 4];
+            console.log(Array.isArray(arr));
+            console.log(arr instanceof Array);
+            console.log(arr.constructor.name == 'Array');
+
+            // 将一组数据转化成数组
+            console.log(Array.of(1, 2, 3, 4, 5));
+            //将伪数组转化数组
+            // console.log(Array.from());
+
+            // 判断数组中是否包含某元素
+            console.log(arr.includes(0));
+            // 找到第一个符合条件的元素
+            let el = arr.find(item => item == 1);
+            console.log(el);
+
+            // 找到第一个符合条件的元素下表
+            let _index = arr.findIndex(item => item == 1);
+            console.log(_index);
+        } {
+            let map = new Map();
+            map.set({ a: 1 }, '1');
+            console.log(map);
+            map.delete({ a: 1 });
+            console.log(map);
+
+            let a = { a: 1 };
+            let map1 = new Map();
+            map1.set(a, 1);
+            console.log(map1);
+            map1.delete(a);
+            console.log(map1);
+        } {
+            let set = new Set();
+            set.add({ a: 1 });
+            console.log(set.has("a"));
+        } {
+            // 封装cookie
+            function setCookie(k, v, t) {
+                var date = new Date();
+                date.setDate(date.getDate() + t);
+                document.cookie = k + '=' + v + ';expires=' + date.toGMTString();
+            };
+            setCookie('v', 1, 1);
+            console.log(getCookie('v'));
+
+            function getCookie(k) {
+                var cookie = document.cookie.split(';');
+                for (var i = 0; i < cookie.length; i++) {
+                    var s = cookie[i].split('=');
+                    if (k == s[0]) {
+                        return s[1];
+                    }
+                };
+            };
+        }
+    </script>
+</body>
+
+</html>

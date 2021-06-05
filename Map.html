@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            let map = new Map();
+            map.set('a', 123).set('b', 456).set(true, 'aaaa').set(null, 111).set([1, 2, 4], 123);
+            console.log('删除前：', map);
+            // 根据键获取值
+            console.log(map.get('a'));
+            console.log(map.get(true));
+            // 通过键删除值
+            console.log(map.delete('a'));
+            console.log('删除后：', map);
+            console.log(map.delete([1, 2, 4]));
+            // 查询
+            console.log(map.has(null));
+            // 清空
+            // console.log(map.clear());
+            // console.log('清空后：', map);
+            console.log(map.size);
+
+        } {
+            let obj = {
+                a: 1,
+                b: 2,
+                c: 3
+            }
+
+            // 对象转换map
+            let map = new Map();
+            for (let [k, v] of Object.entries(obj)) {
+                map.set(k, v);
+            }
+            console.log(map);
+
+            let m1 = new Map(Object.entries(obj));
+            console.log('对象转map', m1);
+            console.log(Object.entries(obj));
+
+            let m2 = new Map([['a', 1], ['b', 2], [true, false]]);
+            console.log('以数组为参数的map结构', m2);
+
+            // map结构转成对象
+            let m3 = new Map();
+            m3.set('aa', 11).set('bb', 22).set('cc', 33);
+            console.log('map 结构', m3);
+            console.log('map 转为 对象', Object.fromEntries(m3));
+        } {
+
+            let map = new Map();
+            map.set('aa', 11).set('bb', 22).set('cc', 33).set(true, false);
+
+            // map 结构的遍历
+            map.forEach((item, index, arr) => {
+                // console.log(arr);
+                console.log('键：', index, '值：', item);
+            });
+
+            // 遍历键
+            console.log('遍历键 <-------');
+            for (let key of map.keys()) {
+                console.log('键：', key);
+            }
+
+            // 遍历值
+            console.log('遍历值 <-------');
+            for (let val of map.values()) {
+                console.log('值：', val);
+            }
+
+            // 遍历键和值
+            console.log('遍历键和值 <-------……');
+            for (let [k, v] of map.entries()) {
+                console.log('键：', k, '值：', v);
+            }
+        }
+    </script>
+</body>
+
+</html>

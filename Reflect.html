@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            let obj = {
+                name: '李四',
+                age: 20
+            }
+            // 获取属性
+            console.log(Reflect.get(obj, 'age'));
+            console.log(Reflect.get(obj, 'name'));
+
+            // 设置属性
+            Reflect.set(obj, 'sex', '男');
+            console.log(obj);
+
+            // 查询属性
+            console.log(Reflect.has(obj, 'name'));
+
+            // 删除属性
+            Reflect.deleteProperty(obj, 'age');
+            console.log(obj);
+
+            // 遍历属性
+            console.log(Reflect.ownKeys(obj));
+
+            // 属性对应属性值
+            for (let key of Reflect.ownKeys(obj)) {
+                console.log(Reflect.get(obj, key));
+            };
+        } {
+            function fn(a) {
+                console.log(a);
+            }
+            Reflect.apply(fn, null, [1]);
+        } {
+            let obj = {
+                x: 20,
+                getX(a, b) {
+                    console.log(this.x + a + b);
+                }
+            }
+
+            let obj1 = { x: 30 }
+            //更改this指向
+            obj.getX.call(obj1, 5, 6);
+            obj.getX.apply(obj1, [5, 6]);
+            obj.getX.bind(obj1)(5, 6);
+
+            Reflect.apply(obj.getX, obj1, [5, 6]);
+        }
+        {
+            function Person(name, age) {
+                this.name = name,
+                    this.age = age
+            }
+            let p1 = new Person('李四', 15);
+            console.log(p1);
+
+            let p2 = Reflect.construct(Person, ['张三', 20]);
+            console.log(p2);
+            console.log(Reflect.apply(Math.floor, undefined, [1.75]));
+            console.log(Reflect.apply("".charAt, "ponies", [3]));
+        }
+        {
+            //定义属性21    
+            let obj = {};
+            Object.defineProperty(obj, 'name', {
+                value: '刘二麻子'   ,
+                writable: true,
+                enumerable: true
+            });
+            Reflect.defineProperty(obj, 'age', {
+                value: 18,
+                writable: false,
+                enumerable: true
+            });
+            console.log(obj);
+        } {
+            let add = (a, b) => {
+                return a + b;
+            }
+            const proxy = new Proxy(add, {
+                apply(target, ctx, args) {
+                    return Reflect.apply(...arguments) * 2;
+                }
+            });
+            console.log(proxy(1,2));            
+        }
+
+    </script>
+</body>
+
+</html>

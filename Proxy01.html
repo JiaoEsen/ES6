@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            let obj = {
+                name: "王伟华",
+                age: 100,
+                _skill: "吃饭",
+                _like: "睡觉",
+                weight: "无法形容",
+                height: "1.6cm"
+            }
+
+
+            let p = new Proxy(obj, {
+                get(target, key) {
+                    return key == 'age' ? 18 : target[key];
+                },
+                set(target, k, v) {
+                    return k == 'weight' || k == 'height' ? false : target[k] = v;
+                },
+                has(target, k) {
+                    return k.startsWith('_') ? false : k in target;
+                },
+                deleteProperty(target, k) {
+                    return k == 'name' ? false : delete target[k];
+                },
+                ownKeys(target) {
+                    return Object.keys(target).filter(item => !item.startsWith('_'));
+                }
+            });
+
+            console.log(p.age);
+            p.weight = 1;
+            p.height = 2;
+            p.name = '';
+            console.log('name' in p);
+            delete 'name';
+            console.log(p);
+            for(let key of Object.keys(p)){
+                console.log(key);
+            };
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        {
+            // Array.isArray(arr) 判断是不是一个数组
+            let arr = [1, 2, 3, 4];
+            console.log(`判断是不是一个数组 ：${Array.isArray(arr)}`);
+        } {
+            // Array.of() 将一组值转换为数组
+            console.log(`将一组值转换为数组 ：${Array.of(1,2,3,4,5)}`);
+        } {
+            // Array.from() 将一个伪数组转换为真正的数组
+            var aDivs = document.querySelectorAll('div');
+            console.log(aDivs);
+
+            var arr = Array.from(aDivs);
+            console.log(arr);
+        } {
+            // fill() 使用给定值，填充一个数组
+            let arr = [1, 2, 3, 4, 5, 6];
+            console.log(arr.fill('s', 3, 5));
+        } {
+            // copyWithin() 在数组内部，将指定位置的内容复制到其他位置，会覆盖原有的成员，然后返回当前数组
+            let arr = [1, 2, 3, 4, 5, 6, 7];
+            console.log(arr.copyWithin(2, 4, 6));
+        } {
+            let arr = ['A', 'B', 'C', 'D', 'E'];
+            for (let key of arr.keys()) {
+                console.log(key);
+            }
+            for (let val of arr.values()) {
+                console.log(val);
+            }
+            for (let [key, val] of arr.entries()) {
+                console.log(key, val);
+            }
+        }
+    </script>
+</body>
+
+</html>

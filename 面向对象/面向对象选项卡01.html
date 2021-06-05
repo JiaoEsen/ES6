@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/tab.css">
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div class="tab_btn">
+            <span class="active">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+        </div>
+        <div class="tab_car">
+            <div class="show">1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </div>
+    </div>
+    <script>
+        function Tab(btns, cars) {
+            this.btns = btns;
+            this.cars = cars;
+            this.change();
+        }
+
+        Tab.prototype.change = function () {
+            this.btns.forEach((item, index) => {
+                item.onclick = () => {
+                    // console.log(this);
+                    this.toggleClass(this.btns, 'active', index);
+                    this.toggleClass(this.cars, 'show', index);
+                }
+            });
+        }
+
+        Tab.prototype.toggleClass = function (els, cname, _index) {
+            els.forEach(item => {
+                item.classList.remove(cname);
+            });
+            this.btns[_index].classList.add(cname);
+            this.cars[_index].classList.add(cname);
+        }
+
+        let btns = document.querySelectorAll('.tab_btn span');
+        let cars = document.querySelectorAll('.tab_car div');
+
+        let tab = new Tab(btns, cars);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /* 
+            在文件中编写代码，将list变量的数据进行处理。
+                要求：将数组按性别gender分组，
+                1、每个分组内的数据按年龄age从小到大排序；
+                2、将数据中性别gender或者年龄age为空null的数据去除；
+                3、为了保护隐私，分组结果信息中只保留姓名name。
+        */
+        const list = [{
+            name: '王婷彤', age: 22, gender: '女'
+        }, {
+            name: '欧阳莉珍', age: 18, gender: '女'
+        }, {
+            name: '赵诚然', age: 30, gender: null
+        }, {
+            name: '郝萱姿', age: 29, gender: '女'
+        }, {
+            name: '刁龙彬', age: 26, gender: '男'
+        }, {
+            name: '怡宁', age: 21, gender: '女'
+        }, {
+            name: '周凯迅', age: 28, gender: '男'
+        }, {
+            name: '张艺琳', age: null, gender: '女'
+        }, {
+            name: '李恩武', age: 30, gender: '男'
+        }];
+
+        let newArr = [{
+            gender: '男',
+            list: []
+        }, {
+            gender: '女',
+            list: []
+        }];
+
+        let sortArr = list.sort((a, b) => a.age - b.age);
+        let filterArr = sortArr.filter(item => item.gender != null && item.age != null);
+
+        filterArr.forEach(item => {
+            if (item.gender == '男') {
+                newArr[0].list.push(item.name);
+            } else {
+                newArr[1].list.push(item.name);
+            }
+        });
+
+        console.log('结果', newArr);
+
+
+    </script>
+</body>
+
+</html>

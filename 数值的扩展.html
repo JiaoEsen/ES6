@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            // 二进制
+            console.log(0b101011);
+            console.log(0B101);
+
+            // 八进制
+            console.log(0o23);
+            console.log(0O60);
+            console.log(0O34);
+
+            // 十六进制
+            console.log(0X078);
+        } {
+            // 将十进制 转为其他进制
+            let num = 255
+            console.log(num.toString(16));
+
+        } {
+            let num = '123abc456';
+            console.log(parseInt(num));
+            console.log(Number.parseInt(num));
+            console.log(Number(num));
+        } {
+            // Number.isFinite();
+            let num = Math.pow(2, 1024);
+            console.log(num);
+            console.log(Number.isFinite(num));
+        } {
+            console.log(Number.EPSILON);
+        } {
+            // ε
+            let sum = 0.1 + 0.2;
+            if (sum - 0.3 < Number.EPSILON) {
+                console.log('0.1+0.2=0.3');
+            } else {
+                console.log('0.1+0.2!=0.3');
+            }
+        } {
+            // let num = Math.pow(2,52);
+            let num = 2 ** 53;
+            console.log(Number.isSafeInteger(num));
+            console.log(num);
+            console.log(num + 1);
+            // 0<=num<2**53 : 准确的数
+            // 2**53<=num < 2**1024: 可以用数表示出来，但是不准确
+            // num>=2**1024: 无法表示，用infinity 表示
+            console.log('安全数', 2 ** 52);
+            console.log('不准确的数', 2 ** 53);
+            console.log(2 ** 1023);
+            console.log('超出范围无法表示的数', 2 ** 1024);
+            console.log(2 ** 1024 + 1);
+            console.log(2 ** 1025);
+        } {
+            let num = 20.7;
+            console.log(Math.trunc(num));
+        } {
+            let num = 5;
+            console.log(Math.sign(num));
+            console.log(Math.sign(-5));
+            console.log(Math.sign(0));
+            console.log(Math.sign(-0));
+            console.log(Math.sign('123ABC'));
+        } {
+            let num = 4 ** 2;
+            console.log(Math.sqrt(81));
+            console.log(Math.cbrt(125));
+        } {
+            let [a, b] = [3, 4];
+            let s = a ** 2 + b ** 2;
+            let c = Math.sqrt(s);
+            console.log('斜边是', c);
+            console.log(Math.hypot(a, b));
+        }
+        {
+            let num = 0o701;
+            console.log(num.toString(10));
+            console.log(8 * 8 * 8);
+        } {
+            console.log(2 ** 3 ** 2);
+        } {
+            let num = 2n ** 53n;
+            console.log(num);
+            console.log(num + 1n);
+            console.log(typeof 1n);
+            console.log(typeof 1);
+            console.log(2n ** 1024n);
+        }
+    </script>
+</body>
+
+</html>

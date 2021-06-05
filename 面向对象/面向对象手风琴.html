@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .title {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: blue;
+            cursor: pointer;
+        }
+
+        .panel {
+            height: 0;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .panel.active {
+            height: 120px;
+        }
+
+        .panel_item {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="title">选项一</div>
+        <div class="panel">
+            <div class="panel_item">1111</div>
+            <div class="panel_item">1111</div>
+
+            <div class="panel_item">1111</div>
+            <div class="panel_item">1111</div>
+
+        </div>
+        <div class="title">选项二</div>
+
+        <div class="panel">
+            <div class="panel_item">1111</div>
+            <div class="panel_item">1111</div>
+
+            <div class="panel_item">1111</div>
+            <div class="panel_item">1111</div>
+
+        </div>
+        <div class="title">选项三</div>
+
+        <div class="panel">
+            <div class="panel_item">1111</div>
+            <div class="panel_item">1111</div>
+
+            <div class="panel_item">1111</div>
+            <div class="panel_item">1111</div>
+
+        </div>
+        <div class="title">选项四</div>
+
+        <div class="panel">
+            <div class="panel_item">1111</div>
+            <div class="panel_item">1111</div>
+
+            <div class="panel_item">1111</div>
+            <div class="panel_item">1111</div>
+
+        </div>
+    </div>
+    <script>
+        function sfq(title, panel) {
+            this.title = title;
+            this.panel = panel;
+            this.sfqController();
+        }
+
+        sfq.prototype.sfqController = function () {
+            this.title.forEach((item, index) => {
+                item.onmouseover = () => {
+                    console.log(1);
+                    this.toggleClass(index);
+                }
+                item.onmouseout = () => {
+                    this.panel.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                }
+            });
+        }
+
+        sfq.prototype.toggleClass = function (_index) {
+            this.panel.forEach(item => {
+                item.classList.remove('active');
+            });
+            this.panel[_index].classList.add('active');
+        };
+
+        let title = document.querySelectorAll('.title');
+        let panel = document.querySelectorAll('.panel');
+        let oSfq = new sfq(title, panel);
+    </script>
+</body>
+
+</html>

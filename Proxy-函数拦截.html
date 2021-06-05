@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        { // 对函数进行拦截
+            function fn(a, b) {
+                console.log(a + b);
+            }
+            let m = new Proxy(fn, {
+                apply(targetFn, ctx, args) {
+                    let newArgs = args.map(item => item * 10);
+                    targetFn(...newArgs);
+                }
+            });
+            m(100, 100);
+        }
+        {
+            // 拦截 new 命令
+            function Fn() {
+                this.name = name;
+                this.age = age;
+            }
+            // new Fn();
+            let proFn = new Proxy(Fn, {
+                construct(target, args) {
+                    console.log(arguments);
+                    return {
+                        name: '汉族' + args[0],
+                        age: args[1] * 2
+                    };
+                }
+            });
+            let pf = new proFn('张三', '11', 18);
+            console.log(pf.name, pf.age);
+        } {
+            function Fn() {
+                this.name = name;
+                this.age = age;
+            }
+            let proFn = new Proxy(Fn, {
+                construct(target, args) {
+                    console.log(arguments);
+                    let obj = {
+                        mz: args[1],
+                        name: args[0],
+                        age: args[2]
+                    }
+                    return obj;
+                }
+            });
+            let pf = new proFn('张三', '汉', 19);
+            console.log(pf);
+        } {
+            function Fn() {
+                this.name = name;
+                this.age = age;
+            }
+            let proFn = new Proxy(Fn, {
+                construct(target, args) { 
+                    let obj = new target(args[0], args[1] * 2);
+                    obj.mz = args[2];
+                    return obj;
+                }
+            });
+            let pf = new proFn('张三',19,'汉');
+            console.log(pf);
+        }
+    </script>
+</body>
+
+</html>

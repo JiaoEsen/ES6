@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            display: block;
+        }
+
+        .wrap {
+            width: 1500px;
+            height: 418px;
+            overflow: hidden;
+        }
+
+        .small {
+            float: left;
+            width: 743px;
+            height: 418px;
+            position: relative;
+        }
+
+        .move {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 0, 0, .5);
+        }
+
+        .big {
+            position: relative;
+            float: left;
+            width: 743px;
+            height: 418px;
+        }
+
+        .big_img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1486px;
+            height: 836px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="small">
+            <div class="move"></div>
+            <img src="./images/743-418-f52-gbm.webp" alt="" class="small_img">
+        </div>
+        <div class="big">
+            <img src="./images/743-418-f52-gbm.webp" class="big_img" alt="">
+        </div>
+    </div>
+    <script>
+        var small = document.querySelector('.small');
+        var big = document.querySelector('.big');
+        var smallImg = document.querySelector('.small_img');
+        var bigImg = document.querySelector('.big_img');
+        var move = document.querySelector('.move');
+
+        small.onmousemove = function (e) {
+            console.log(1);
+        }
+    </script>
+</body>
+
+</html>

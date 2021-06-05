@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(1);
+        console.log(2);
+        console.log(3);
+
+        asyncFn(3000, fn);
+        // asyncFn(5000, fn1);
+
+        function asyncFn(time, cb) {
+            setTimeout(() => {
+                console.log('延时器');
+                cb(fn2);
+            }, time);
+        }
+
+        function fn(cb) {
+            console.log(4);
+            console.log(5);
+            asyncFn(5000, cb());
+        }
+
+        function fn1() {
+            console.log(6);
+        }
+
+        function fn2() {
+            console.log(7);
+        }
+    </script>
+</body>
+
+</html>

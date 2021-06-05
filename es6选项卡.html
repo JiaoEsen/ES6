@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 选项卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .tab {
+            width: 1200px;
+            height: 800px;
+            margin: 0 auto;
+            background: pink;
+        }
+        
+        .tab .tab_btns {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            display: -webkit-flex;
+        }
+        
+        .tab .tab_btns span {
+            flex: 1;
+            height: 100%;
+            box-sizing: border-box;
+            border-right: 2px solid #000;
+            text-align: center;
+            font-size: 40px;
+            line-height: 100px;
+            background: blue;
+        }
+        
+        .tab .tab_btns span.active {
+            background: skyblue;
+        }
+        
+        .tab .tab_btns span:last-child {
+            border-right: none;
+        }
+        
+        .tab_car {
+            width: 100%;
+            height: 700px;
+            position: relative;
+        }
+        
+        .tab_car div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: skyblue;
+            display: none;
+        }
+        
+        .tab_car div.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <div class="tab_btns">
+            <span class="tab_btns_item">1</span>
+            <span class="tab_btns_item">2</span>
+            <span class="tab_btns_item">3</span>
+        </div>
+        <div class="tab_car">
+            <div class="tab_car_item">1</div>
+            <div class="tab_car_item">2</div>
+            <div class="tab_car_item">3</div>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            let tabBtns = document.querySelectorAll('.tab_btns .tab_btns_item');
+            let tabCars = document.querySelectorAll('.tab_car .tab_car_item');
+
+        }
+    </script>
+</body>
+
+</html>

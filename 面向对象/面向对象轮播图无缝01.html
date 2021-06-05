@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .banner {
+            position: relative;
+            width: 743px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .banner .bnr_box {
+            width: calc(743px*6);
+            overflow: hidden;
+        }
+
+        .bnr_box_item {
+            width: 743px;
+            float: left;
+        }
+
+        .nav_box {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .nav_box div {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.5s;
+        }
+
+        .nav_box div.active {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .next,
+        .prev {
+            position: absolute;
+            top: 50%;
+            width: 70px;
+            height: 70px;
+            margin-top: -35px;
+            background: url(./images/banner_arrow.png) no-repeat;
+        }
+
+        .next {
+            right: 0;
+            background-position: left bottom;
+        }
+
+        .prev {
+            left: 0;
+            background-position: left top;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner" id="banner">
+        <div class="bnr_box">
+            <div class="bnr_box_item"><a href="#"><img src="./images/0409HOME_Combo_KV_IM-GBM-KV_743X418.webp"
+                        alt=""></a></div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/2_IM_A52-LTE_Product-KV_PC_743x418.jpg" alt=""></a>
+            </div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/743-418-20210128-s21.webp" alt=""></a></div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/743-418-f52-gbm.webp" alt=""></a></div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/743-418-gbm-dianyingjie-20210528.webp" alt=""></a>
+            </div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/2.jpg" alt=""></a></div>
+        </div>
+        <div class="nav_box">
+            <div class="active"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <a href="javascript:;" class="next"></a>
+        <a href="javascript:;" class="prev"></a>
+    </div>
+
+    <div class="banner" id="banner1">
+        <div class="bnr_box">
+            <div class="bnr_box_item"><a href="#"><img src="./images/0409HOME_Combo_KV_IM-GBM-KV_743X418.webp"
+                        alt=""></a></div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/2_IM_A52-LTE_Product-KV_PC_743x418.jpg" alt=""></a>
+            </div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/743-418-20210128-s21.webp" alt=""></a></div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/743-418-f52-gbm.webp" alt=""></a></div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/743-418-gbm-dianyingjie-20210528.webp" alt=""></a>
+            </div>
+            <div class="bnr_box_item"><a href="#"><img src="./images/2.jpg" alt=""></a></div>
+        </div>
+        <div class="nav_box">
+            <div class="active"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <a href="javascript:;" class="next"></a>
+        <a href="javascript:;" class="prev"></a>
+    </div>
+    <script>
+        console.log('V 1.0');
+        class Banner {
+            constructor(id, options) {
+                this.timer = null; // 定时器
+                this.banner = document.getElementById(id); // 主id
+                this.bnrBox = this.banner.querySelector('.bnr_box');
+                this.bnrItems = this.bnrBox.querySelectorAll('.bnr_box_item');
+                this.navDd = this.banner.querySelector('.nav_box');
+                this.navDds = this.navDd.querySelectorAll('.nav_box div');
+                this.next = this.banner.querySelector('.next');
+                this.prev = this.banner.querySelector('.prev');
+                this.len = this.bnrItems.length; // 元素长度
+                this.oneW = this.bnrItems[0].offsetWidth; // 当个元素长度
+                this.cName = 'active'; // 添加类名
+                this.isTransitioned = true; // 动画开关
+                this.flag = false; // 普开
+                this._index = 1; // 索引
+                this.nav_index = 0; // 导航索引
+                this.autoplay = options.autoplay || false; // 是否自动轮播
+                this.delay = options.delay || 2000; // 延时轮播
+                this.init(); //初始化
+
+
+            }
+
+            init() {
+                this.toNext();
+                this.toPrev();
+                this.cloneElem();
+                this.clacWith();
+                this.setTranslateX(this.bnrBox, -(this._index * this.oneW));
+                this.setTransitionEnd();
+                this.toDd();
+                this.play();
+                this.setMouse();
+
+            }
+
+            // 下一张
+            toNext() {
+                this.next.onclick = () => {
+                    if (this.flag) return;
+                    this.flag = true;
+                    this._index++;
+                    this.nav_index++;
+                    this.setMoveX();
+                    console.log(this._index);
+                }
+            }
+
+            // 上一张
+            toPrev() {
+                this.prev.onclick = () => {
+                    if (this.flag) return;
+                    this.flag = true;
+                    this._index--;
+                    this.nav_index--;
+                    console.log(this.nav_index);
+                    this.setMoveX();
+                }
+            }
+
+
+
+            // 点击小圆点
+            toDd() {
+                this.navDds.forEach((item, index) => {
+                    item.onclick = () => {
+                        console.log(1);
+                        this._index = index + 1;
+                        this.nav_index = index;
+                        this.setMoveX();
+                    }
+                });
+            }
+
+            // 设置移动距离
+            setMoveX() {
+                this.setTransition(this.bnrBox, 0.8);
+                this.setTranslateX(this.bnrBox, -(this._index * this.oneW));
+                this.fyq();
+            }
+
+            // 设置 小圆点
+            setNavDd() {
+                this.removAllClass(this.navDds, this.cName);
+                this.addClass(this.navDds[this.nav_index], this.cName);
+            }
+
+            // 添加类名
+            addClass(el, cname) {
+                el.classList.add(cname);
+            }
+
+            // 删除类名
+            removAllClass(el, cname) {
+                el.forEach(item => {
+                    item.classList.remove(cname);
+                });
+            }
+
+            // 克隆元素
+            cloneElem() {
+                this.bnrBox.appendChild(this.bnrItems[0].cloneNode(true));
+                this.bnrBox.prepend(this.bnrItems[this.len - 1].cloneNode(true));
+            }
+
+
+            // 重新计算宽度
+            clacWith() {
+                console.log(this.bnrBox.querySelectorAll('.bnr_box_item').length);
+                this.bnrBox.style.width = ((this.bnrBox.querySelectorAll('.bnr_box_item').length) * this.oneW) + 'px';
+            }
+
+            // 小圆点
+            fyq() {
+                this.toDd();
+                this.nav_index = this.nav_index < 0 ? this.len - 1 : this.nav_index;
+                this.nav_index = this.nav_index > this.len - 1 ? 0 : this.nav_index;
+                this.setNavDd();
+            }
+
+            // 设置过渡
+            setTransition(el, t) {
+                el.style.transition = `${t}s cubic-bezier(0.785, 0.135, 0.15, 0.86)`;
+            }
+
+            // 设置 移动
+            setTranslateX(el, x) {
+                el.style.transform = `translateX(${x}px)`;
+            }
+
+            // 去除过渡
+            removeTransition(el) {
+                el.style.transition = 'none';
+            }
+
+            // 自动轮播 执行
+            play() {
+                this.setAutoPlay(this.autoplay, this.delay);
+            }
+
+            // 自动轮播 封装
+            setAutoPlay(autoplay, t) {
+                if (autoplay) {
+                    this.timer = setInterval(() => {
+                        this._index++;
+                        this.nav_index++;
+                        this.setMoveX();
+                    }, t);
+                }
+            }
+
+            // 监控鼠标移入移出
+            setMouse() {
+                this.banner.onmouseover = () => {
+                    clearInterval(this.timer);
+                }
+                this.banner.onmouseout = () => {
+                    clearInterval(this.timer);
+                    this.play();
+                }
+
+            }
+
+            // 监控 过渡完成
+            setTransitionEnd() {
+                this.bnrBox.addEventListener('transitionend', () => {
+                    this.flag = false;
+                    this.removeTransition(this.bnrBox);
+                    if (this._index == this.len + 1) {
+                        this._index = 1;
+                        this.setTranslateX(this.bnrBox, -(this._index * this.oneW));
+                    }
+
+                    if (this._index == 0) {
+                        this._index = this.len;
+                        console.log(this._index);
+                        console.log(this.len);
+                        this.setTranslateX(this.bnrBox, -(this._index * this.oneW));
+                    }
+
+                });
+            }
+        }
+        console.log(document.getElementById('banner'));
+        let banner = new Banner('banner', {
+            autoplay: true,
+            delay: 3000
+        });
+
+        let banner1 = new Banner('banner1', {
+            autoplay: true,
+            delay: 4000
+        });
+
+        let arr = [];
+    </script>
+</body>
+
+</html>

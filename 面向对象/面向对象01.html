@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            function CreatePerson(name, age) {
+                // 创建对象
+                // let obj = new Object();
+                // this
+                // 添加属性和方法
+                this.name = name;
+                this.age = age;
+                // return obj;
+            }
+
+            let obj1 = new CreatePerson('侯一', 28);
+            let obj2 = new CreatePerson('侯二', 18);
+            console.log(obj1);
+            console.log(obj2);
+            /* 
+                new 关键字的作用
+                # 在构造函数内部创建this对象
+                # 让构造函数隐式的返回this对象
+                # this指向new 构造函数创建出来的实例
+                # 让实例的__proto__属性指向其构造函数的prototype（原型）属性
+            */
+
+
+
+
+
+
+
+
+
+
+            // 该函数的功能：创造人
+            /*  // 创建对象
+             let obj1 = new Object();
+            // 添加属性和方法
+            obj1.name = '侯二';
+            obj1.age = 18;
+            console.log(obj1); */
+        }
+    </script>
+</body>
+
+</html>
